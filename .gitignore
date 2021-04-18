@@ -1,0 +1,6 @@
+dist
+node_modules
+src/data/*.json
+.ENV
+main
+*.zip
