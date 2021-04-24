@@ -4,3 +4,4 @@ src/data/*.json
 .ENV
 main
 *.zip
+yarn-error.log
