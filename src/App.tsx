@@ -8,6 +8,7 @@ export default function App() {
   const [imgData, setImgData] = useState<string>("");
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [qrValue, setQrValue] = useState<string>("");
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setImgData("");
@@ -36,16 +37,16 @@ export default function App() {
   return (
     <>
       <h1>QR code generator</h1>
-      <h2>Generate QR code from plain text</h2>
+      <h2 className={styles.secondaryTitle}>Generate QR code from plain text</h2>
       <form onSubmit={handleSubmit}>
         <input ref={inputRef} type="text" name="input" autoComplete="off" />
-        <input type="submit" />
+        <input type="submit" value="Generate!" />
       </form>
       {imgData && (
         <div className={styles.container}>
           <img src={`data:image/png;base64,${imgData}`} alt="qrcode" />
           <h2 className={styles.text}>
-            <i title={qrValue}>{qrValue}</i>
+            <i className={styles.innerText} title={qrValue}>{qrValue}</i>
           </h2>
         </div>
       )}
