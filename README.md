@@ -2,6 +2,7 @@
 
 ## Frontend
 React app with typescript
+> [particles-js](https://github.com/VincentGarreau/particles.js/) used for background
 
 ### Commands
 - yarn start - start dev server
