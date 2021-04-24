@@ -25,7 +25,7 @@
   left: 50%;
   transform: translateX(-50%);
   top: 2rem;
-  min-height: 50rem;
+  min-height: 60rem;
   width: 40rem;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,12 @@
   box-shadow: 3px 3px 12px #cecece;
 }
 
+.title {
+  margin: 1rem 0 2rem;
+}
+
 .secondary-title {
+  margin: 1rem 0 2rem;
   font-size: 2rem;
 }
 
@@ -62,6 +67,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
   .inner-text {
     box-sizing: border-box;
     width: 35rem;
@@ -71,4 +77,25 @@
     text-align: center;
     padding: 1rem;
   }
+}
+
+.form {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding: 0rem 2rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+}
+
+.submit {
+  padding: 0.5rem 2rem;
+}
+
+.qr-code {
+  height: 32rem;
+  width: 32rem;
 }

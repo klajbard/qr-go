@@ -32,7 +32,7 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 			resp.Body = "Something bad happened. Please try again with different input."
 			resp.StatusCode = 500
 		} else {
-			qrCode, _ = barcode.Scale(qrCode, 256, 256)
+			qrCode, _ = barcode.Scale(qrCode, 400, 400)
 
 			buf := new(bytes.Buffer)
 			png.Encode(buf, qrCode)
