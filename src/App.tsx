@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 import styles from "./App.less";
+import { GitHubIcon } from "./icons/icons";
 
 export default function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -70,6 +71,16 @@ export default function App() {
           <strong>{errorMsg}</strong>
         </div>
       )}
+      <footer className={styles.footer}>
+        <a
+          className={styles.githubIcon}
+          title="Source code on GitHub"
+          href="https://github.com/klajbard/qr-go"
+        >
+          <GitHubIcon />
+          github.com/klajbard/qr-go
+        </a>
+      </footer>
     </>
   );
 }
