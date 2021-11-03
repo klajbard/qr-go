@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"image/png"
+	"net/url"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -27,7 +28,8 @@ func HandleLambdaEvent(ctx context.Context, request events.APIGatewayProxyReques
 		resp.Body = "Input should not be exceed length of 256."
 		resp.StatusCode = 400
 	} else {
-		qrCode, err := qr.Encode(acceptedParams.Input, qr.Q, qr.Auto)
+		unescaped, _ := url.QueryUnescape(acceptedParams.Input)
+		qrCode, err := qr.Encode(unescaped, qr.Q, qr.Auto)
 		if err != nil {
 			resp.Body = "Something bad happened. Please try again with different input."
 			resp.StatusCode = 500

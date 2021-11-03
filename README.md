@@ -22,5 +22,5 @@ AWS lambda function written in Go
 ```sh
 GOOS=linux go build main.go # Creates binary 'main'
 zip main.zip main # Creates zip file from binary
-aws2 lambda update-function-code --function-name my-lambda --zip-file fileb://main.zip ## Uploads code to AWS lambda
+aws lambda update-function-code --function-name my-lambda --zip-file fileb://main.zip ## Uploads code to AWS lambda
 ```
