@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import React, { FormEvent, useRef, useState } from "react";
+import axios, { AxiosResponse } from "axios";
 
-import styles from "./App.less";
 import { GitHubIcon } from "./icons/icons";
+import * as Styled from "./styled";
 
 export default function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -10,13 +10,13 @@ export default function App() {
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [qrValue, setQrValue] = useState<string>("");
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setImgData("");
     setErrorMsg("");
     const inputString = inputRef.current?.value || "";
     const inputData = {
-      input: escape(inputString),
+      input: decodeURIComponent(inputString),
     };
     axios
       .post(
@@ -26,9 +26,7 @@ export default function App() {
       .then(({ data }: AxiosResponse) => {
         setImgData(data);
       })
-      .catch(({ response }: AxiosError) => {
-        setErrorMsg(response?.data);
-      });
+      .catch(setErrorMsg);
     if (inputRef.current) {
       setQrValue(inputRef.current.value);
       inputRef.current.value = "";
@@ -37,50 +35,46 @@ export default function App() {
 
   return (
     <>
-      <h1 className={styles.title}>QR code generator</h1>
-      <h2 className={styles.secondaryTitle}>
-        Generate QR code from plain text
-      </h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          className={styles.input}
-          ref={inputRef}
-          type="text"
-          name="input"
-          autoComplete="off"
-        />
-        <input className={styles.submit} type="submit" value="Generate!" />
-      </form>
-      {imgData && (
-        <div className={styles.container}>
-          <img
-            className={styles.qrCode}
-            src={`data:image/png;base64,${imgData}`}
-            alt="qrcode"
+      <Styled.GlobalStyle />
+      <Styled.Wrapper>
+        <Styled.Title>QR code generator</Styled.Title>
+        <Styled.SubTitle>Generate QR code from plain text</Styled.SubTitle>
+        <Styled.Form onSubmit={handleSubmit}>
+          <Styled.Input
+            ref={inputRef}
+            type="text"
+            name="input"
+            autoComplete="off"
           />
-          <h2 className={styles.text}>
-            <i className={styles.innerText} title={qrValue}>
-              {qrValue}
-            </i>
-          </h2>
-        </div>
-      )}
-      {errorMsg && (
-        <div>
-          <h2>Error</h2>
-          <strong>{errorMsg}</strong>
-        </div>
-      )}
-      <footer className={styles.footer}>
-        <a
-          className={styles.githubIcon}
-          title="Source code on GitHub"
-          href="https://github.com/klajbard/qr-go"
-        >
-          <GitHubIcon />
-          github.com/klajbard/qr-go
-        </a>
-      </footer>
+          <Styled.Submit type="submit" value="Generate!" />
+        </Styled.Form>
+        {imgData && (
+          <Styled.QRContainer>
+            <Styled.QRCode
+              src={`data:image/png;base64,${imgData}`}
+              alt="qrcode"
+            />
+            <Styled.Text>
+              <i title={qrValue}>{qrValue}</i>
+            </Styled.Text>
+          </Styled.QRContainer>
+        )}
+        {errorMsg && (
+          <div>
+            <h2>Error</h2>
+            <strong>{errorMsg}</strong>
+          </div>
+        )}
+        <Styled.Footer>
+          <Styled.Icon
+            title="Source code on GitHub"
+            href="https://github.com/klajbard/qr-go"
+          >
+            <GitHubIcon />
+            github.com/klajbard/qr-go
+          </Styled.Icon>
+        </Styled.Footer>
+      </Styled.Wrapper>
     </>
   );
 }
