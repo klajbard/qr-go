@@ -12,7 +12,7 @@ React app with typescript
 ### Deploy
 Upload to S3 bucket using aws-cli:
 ```
-aws2 s3 sync ./dist s3://bucket-name
+aws s3 sync ./dist s3://bucket-name
 ```
 
 ## Backend
